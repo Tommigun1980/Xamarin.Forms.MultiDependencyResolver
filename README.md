@@ -65,7 +65,8 @@ var implementations = DependencyService.Get<IMultiDependencyResolver>().Get<IMyS
 var implementations = DependencyService.Resolve<IEnumerable<IMySharedInterface>>();
 ```
 
-Note that you have to use DependencyService.Resolve<Type>(); DependencyService.Get<Type>() won't work.
+This is the recommended way.
+Note that you have to use DependencyService.Resolve, DependencyService.Get won't work.
 
 In order to use this second method, you have to enable it by calling this in your code once:
 
