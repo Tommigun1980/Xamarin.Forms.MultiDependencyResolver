@@ -14,15 +14,13 @@ This package adds support for multiple implementations to Xamarin.Forms's built-
 
 ### Setup
 
-1)
-Register IMultiDependencyResolver with Xamarin's DI system:
+1) Register IMultiDependencyResolver with Xamarin's DI system:
 
 ```c#
 DependencyService.Register<MultiDependencyResolver>();
 ```
 
-2)
-Create a shared interface for the relevant services:
+2) Create a shared interface for the relevant services:
 
 ```c#
 interface IMySharedInterface { }
@@ -35,16 +33,14 @@ class MyService1 : IMySharedInterface { }
 class MyService2 : IMySharedInterface { }
 ```
 
-3)
-Register your dependencies with Xamarin's DI system normally:
+3) Register your dependencies with Xamarin's DI system normally:
 
 ```c#
 DependencyService.Register<MyService1>();
 DependencyService.Register<MyService2>();
 ```
 
-4)
-Register your implementations with the multi dependency resolver:
+4) Register your implementations with the multi dependency resolver:
 
 ```c#
 var multiDependencyResolver = DependencyService.Get<IMultiDependencyResolver>();
@@ -57,15 +53,13 @@ multiDependencyResolver.Register<IMySharedInterface, MyService2>();
 
 There are two ways of getting the enumeration of implementations for any registered interface.
 
-1)
-Get them from the multi dependency resolver directly:
+1) Get them from the multi dependency resolver directly:
 
 ```c#
 var implementations = DependencyService.Get<IMultiDependencyResolver>().Get<IMySharedInterface>();
 ```
 
-2)
-Get them from the Xamarin.Forms's built-in DI container:
+2) Get them from the Xamarin.Forms's built-in DI container:
 
 ```c#
 var implementations = DependencyService.Resolve<IEnumerable<IMySharedInterface>>();
