@@ -53,25 +53,25 @@ multiDependencyResolver.Register<IMySharedInterface, MyService2>();
 
 There are two ways of getting the enumeration of implementations for any registered interface.
 
-1) Get them from the multi dependency resolver directly:
-
-```c#
-var implementations = DependencyService.Get<IMultiDependencyResolver>().Get<IMySharedInterface>();
-```
-
-2) Get them from the Xamarin.Forms's built-in DI container:
+1) The recommended way is to get them from the Xamarin.Forms's built-in DI container:
 
 ```c#
 var implementations = DependencyService.Resolve<IEnumerable<IMySharedInterface>>();
 ```
 
-This is the recommended way.
 Note that you have to use DependencyService.Resolve, DependencyService.Get won't work.
 
-In order to use this second method, you have to enable it by calling this in your code once:
+In order to use this approach you have to enable it by calling this in your code once:
 
 ```c#
 DependencyService.Get<IMultiDependencyResolver>().RegisterDependencyServiceResolver();
 ```
 
-This registers a Xamarin.Forms DependencyResolver (to allow piggybacking on the DependencyService), so if your app requires the DependencyResolver for something else, method 1 is recommended.
+This registers a Xamarin.Forms DependencyResolver (to allow piggybacking on the DependencyService), so if your app requires the DependencyResolver for something else, see below.
+
+
+2) Get them from the multi dependency resolver directly:
+
+```c#
+var implementations = DependencyService.Get<IMultiDependencyResolver>().Get<IMySharedInterface>();
+```
